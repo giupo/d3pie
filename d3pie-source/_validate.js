@@ -27,11 +27,11 @@ var validate = {
 
 		// confirm some data has been supplied
 		if (!helpers.isArray(options.data.content)) {
-			console.error("d3pie error: invalid config structure: missing data.content property.");
+			console.error("d3pie error: invalid config structure: data supplied is not an Array: ", options.data.content);
 			return false;
 		}
 		if (options.data.content.length === 0) {
-			console.error("d3pie error: no data supplied.");
+			console.error("d3pie error: data supplied is empty");
 			return false;
 		}
 
