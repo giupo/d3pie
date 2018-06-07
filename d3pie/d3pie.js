@@ -1788,11 +1788,21 @@ var tt = {
             if (pie.options.tooltips.type === "caption") {
                 caption = d.caption;
             }
-            return tt.replacePlaceholders(pie, caption, i, {
-                label: d.label,
-                value: d.value,
-                percentage: d.percentage
-            });
+	    
+	    var placeHolderData = {
+	    	label: d.label,
+		value: d.value,
+		percentage: d.percentage
+	    };
+	    
+	    var customPlaceholders = pie.options.tooltips.customPlaceholders;
+	    if (typeof customPlaceholders !== 'undefined') {
+	    	for(var ip = 0; ip < customPlaceholders.length; ip = ip + 1) {
+		     placeHolderData[customPlaceholders[ip]] = d[customPlaceholders[ip]];
+		}
+	    }
+	    
+            return tt.replacePlaceholders(pie, caption, i, placeHolderData);
         });
 
 		tooltips.selectAll("." + pie.cssPrefix + "tooltip rect")
